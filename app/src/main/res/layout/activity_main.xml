@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+
+    <!-- Zone du haut (Header Card avec gradient indigo moderne) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/zoneHaut"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/header_card_bg"
+        android:elevation="8dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/clavierNumerique"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="48">
+
+        <!-- Titre Currency Converter -->
+        <TextView
+            android:id="@+id/tvTitre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:letterSpacing="0.05"
+            android:text="@string/titre_app"
+            android:textColor="@color/blanc"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Ligne 1 : Devise Source + Montant Saisi -->
+        <Spinner
+            android:id="@+id/spDeviseSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:backgroundTint="@color/blanc"
+            app:layout_constraintBottom_toTopOf="@+id/btnInverser"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitre" />
+
+        <TextView
+            android:id="@+id/tvMontant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="end"
+            android:text="@string/valeur_initiale_montant"
+            android:textColor="@color/blanc"
+            android:textSize="44sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/spDeviseSource"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/spDeviseSource"
+            app:layout_constraintTop_toTopOf="@+id/spDeviseSource" />
+
+        <View
+            android:id="@+id/ligneMontant"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="#40FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/tvMontant"
+            app:layout_constraintStart_toStartOf="@+id/tvMontant"
+            app:layout_constraintTop_toBottomOf="@+id/tvMontant" />
+
+        <!-- Bouton Inverser -->
+        <ImageButton
+            android:id="@+id/btnInverser"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/swap_btn_bg"
+            android:contentDescription="@string/desc_inverser"
+            android:padding="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_swap"
+            app:layout_constraintBottom_toTopOf="@+id/spDeviseCible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spDeviseSource" />
+
+        <!-- Ligne 2 : Devise Cible + Résultat -->
+        <Spinner
+            android:id="@+id/spDeviseCible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:backgroundTint="@color/blanc"
+            app:layout_constraintBottom_toTopOf="@+id/btnConvertir"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnInverser" />
+
+        <TextView
+            android:id="@+id/tvResultat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="end"
+            android:textColor="#38BDF8"
+            android:textSize="44sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/spDeviseCible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/spDeviseCible"
+            app:layout_constraintTop_toTopOf="@+id/spDeviseCible" />
+
+        <View
+            android:id="@+id/ligneResultat"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="#38BDF8"
+            app:layout_constraintEnd_toEndOf="@+id/tvResultat"
+            app:layout_constraintStart_toStartOf="@+id/tvResultat"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultat" />
+
+        <!-- Bouton CONVERTIR -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConvertir"
+            android:layout_width="180dp"
+            android:layout_height="52dp"
+            android:backgroundTint="@color/primary_indigo"
+            android:elevation="4dp"
+            android:letterSpacing="0.08"
+            android:text="@string/btn_convertir"
+            android:textColor="@color/blanc"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="26dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Zone du bas : Clavier numérique personnalisé (TableLayout 4 x 3) -->
+    <TableLayout
+        android:id="@+id/clavierNumerique"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_dark"
+        android:padding="12dp"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zoneHaut"
+        app:layout_constraintVertical_weight="52">
+
+        <!-- Ligne 1 : 7, 8, 9 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn7"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="7"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn8"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="8"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn9"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="9"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+        </TableRow>
+
+        <!-- Ligne 2 : 4, 5, 6 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn4"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="4"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn5"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="5"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn6"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="6"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+        </TableRow>
+
+        <!-- Ligne 3 : 1, 2, 3 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn1"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="1"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn2"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="2"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn3"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="3"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+        </TableRow>
+
+        <!-- Ligne 4 : C, 0, . -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnC"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="@string/touche_c"
+                android:textColor="@color/key_c_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn0"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="0"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPoint"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:background="@drawable/key_background"
+                android:text="@string/touche_point"
+                android:textColor="@color/key_text"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+        </TableRow>
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

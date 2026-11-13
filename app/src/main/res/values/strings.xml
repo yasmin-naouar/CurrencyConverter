@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Currency Converter</string>
+    <string name="titre_app">Currency Converter</string>
+    <string name="btn_convertir">CONVERTIR</string>
+    <string name="valeur_initiale_montant">0</string>
+    <string name="msg_erreur_montant_zero">Veuillez saisir un montant</string>
+    <string name="desc_inverser">Échanger les devises</string>
+    <string name="touche_c">C</string>
+    <string name="touche_point">.</string>
+
+    <string-array name="devises">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>TND</item>
+        <item>GBP</item>
+        <item>JPY</item>
+        <item>CAD</item>
+    </string-array>
+</resources>
